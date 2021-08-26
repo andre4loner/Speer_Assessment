@@ -3,15 +3,6 @@ const bcrypt = require("bcrypt")
 // User schema
 const User = require("../models/User.js")
 
-// const isAuth = (req, res, next) => {
-//   if (req.session.isAuth) {
-//     next()
-//   } else {
-//     res.redirect("/login")
-//   }
-// }
-
-
 // Registering user
 router.post("/register", async (req, res) => {
   // Password variable here is reqPassword because another variable
@@ -21,7 +12,7 @@ router.post("/register", async (req, res) => {
   if (!username || !reqPassword) {
     return res.status(400).json("Username or password not provided.")
   }
-  
+
   try {
     // Checking for user with same username in database
     const temp = await User.findOne({ username })
@@ -53,7 +44,6 @@ router.post("/register", async (req, res) => {
     throw err
   }
 })
-
 
 // Logging in user
 router.post("/login", async (req, res) => {
@@ -90,13 +80,12 @@ router.post("/login", async (req, res) => {
   }
 })
 
-
 // Logging out user
 router.post("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) throw err
   })
-  res.status(200).json({ sessionID: null})
+  res.status(200).json({ sessionID: null })
 })
 
 module.exports = router

@@ -35,20 +35,6 @@ app.use(express.urlencoded({ extended: true })) // Gives app access to response 
 // Configuring app routes
 app.use("/api/auth", authRoute)
 app.use("/api/tweets", tweetsRoute)
-// Error handling
-// app.use((req, res, next) => {
-//   const err = new Error("Not found")
-//   err.status = 404
-//   next(err)
-// })
-// app.use((err, req, res, next) => {
-//   res.status(err.status || 500).json({
-//     error: {
-//       name: err.name,
-//       message: err.message,
-//     }
-//   })
-// })
 
 mongoose
   .connect(process.env.MONGO_URI, {
